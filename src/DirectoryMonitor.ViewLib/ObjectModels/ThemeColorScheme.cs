@@ -2,8 +2,9 @@
 
 namespace DirectoryMonitor.ViewLib.ObjectModels;
 
-public class ThemeColorScheme
+[ExcludeFromCodeCoverage]
+public sealed class ThemeColorScheme
 {
-    public string DisplayName { get; set; } = string.Empty;
-    public Theme? Theme { get; set; }
+    public string DisplayName { get; init; } = string.Empty;
+    public Theme? Theme { get; init; }
 }

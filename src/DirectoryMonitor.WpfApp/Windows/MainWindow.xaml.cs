@@ -18,22 +18,7 @@ public partial class MainWindow
         AvailableLanguages = AvailableLanguages.Instance;
         ThemeManager = ThemeManager.Current;
         SelectedTheme = ThemeManager.Current.DetectTheme();
-
-        BaseColors = ThemeManager.Current.BaseColors
-            .Select(baseColor => new ThemeBaseColor
-            {
-                DisplayName = baseColor,
-                ColorSchemes = ThemeManager.Current.ColorSchemes
-                    .Select(colorScheme => new ThemeColorScheme
-                    {
-                        DisplayName = colorScheme,
-                        Theme = ThemeManager.Current.GetTheme(baseColor, colorScheme)
-                    })
-                    .ToSortableObservableCollection()
-                    .Sort(i => i.DisplayName)
-            })
-            .ToSortableObservableCollection()
-            .Sort(i => i.DisplayName);
+        BaseColors = ThemeManager.Current.ToSortableObservableCollection();
 
         InitializeComponent();
 
@@ -71,7 +56,7 @@ public partial class MainWindow
     internal SortableObservableCollection<ThemeBaseColor> BaseColors
     {
         get => (SortableObservableCollection<ThemeBaseColor>) GetValue(BaseColorsProperty);
-        set => SetValue(BaseColorsProperty, value);
+        init => SetValue(BaseColorsProperty, value);
     }
 
     public ICommand ApplicationExitCommand =>

@@ -11,7 +11,7 @@ public sealed class LocalizationConverter : MarkupExtension, IValueConverter
             ? null
             : GlobalizedApplication.Instance.TryFindResource(value) ?? parameter;
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
 
     public override object ProvideValue(IServiceProvider serviceProvider) =>

@@ -8,14 +8,12 @@
 
     <!--#region Generic -->
     <sys:String x:Key="Generic_TranslatedByLabel">Last Updated By:</sys:String>
-    <sys:String x:Key="Generic_TranslatedBy">Bletch (US)</sys:String>
+    <sys:String x:Key="Generic_TranslatedBy">Bletch</sys:String>
     <!--#endregion-->
 
-    <sys:String x:Key="Application_Title">Directory Monitor (US)</sys:String>
+    <sys:String x:Key="Application_Title">Directory Monitor</sys:String>
 
-    <sys:String x:Key="Menu_File">_File (US)</sys:String>
-    <sys:String x:Key="Menu_Exit">E_xit (US)</sys:String>
-    <sys:String x:Key="Menu_Language">Language (US)</sys:String>
-    <sys:String x:Key="Menu_Themes">Themes (US)</sys:String>
+    <sys:String x:Key="Menu_Language">Language</sys:String>
+    <sys:String x:Key="Menu_Themes">Themes</sys:String>
 
 </Globalizer:GlobalizationResourceDictionary>

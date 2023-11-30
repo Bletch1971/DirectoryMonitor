@@ -1,7 +1,8 @@
 ﻿namespace DirectoryMonitor.ViewLib.ObjectModels;
 
-public class ThemeBaseColor
+[ExcludeFromCodeCoverage]
+public sealed class ThemeBaseColor
 {
-    public string DisplayName { get; set; } = string.Empty;
-    public SortableObservableCollection<ThemeColorScheme> ColorSchemes { get; set; } = new(Enumerable.Empty<ThemeColorScheme>());
+    public string DisplayName { get; init; } = string.Empty;
+    public SortableObservableCollection<ThemeColorScheme> ColorSchemes { get; init; } = new();
 }

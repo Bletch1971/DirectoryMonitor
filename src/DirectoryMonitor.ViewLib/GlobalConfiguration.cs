@@ -6,7 +6,6 @@ global using System.Windows;
 global using System.Windows.Data;
 global using System.Windows.Input;
 global using System.Windows.Markup;
-//global using System.Windows.Media.Imaging;
 //global using AutoMapper;
 
 using System.Runtime.CompilerServices;
