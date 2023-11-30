@@ -1,0 +1,47 @@
+﻿<mahctls:MetroWindow x:Class="DirectoryMonitor.WpfApp.Windows.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:mahctls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                     xmlns:win="clr-namespace:DirectoryMonitor.WpfApp.Windows"
+                     d:DataContext="{d:DesignInstance Type=win:MainWindow}"
+                     mc:Ignorable="d"
+                     Icon="/Art/favicon.ico"
+                     Title="{DynamicResource Application_Title}"
+                     MinWidth="800" MinHeight="600"
+                     Height="450" Width="800"
+                     WindowStartupLocation="CenterScreen"
+                     SaveWindowPosition="True"
+                     ResizeMode="CanResizeWithGrip"
+                     x:Name="Main">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                <MenuItem Header="{DynamicResource Menu_File}">
+                    <MenuItem Header="{DynamicResource Menu_Exit}"
+                              Command="{Binding ApplicationExitCommand}"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource Menu_Language}"
+                          ItemsSource="{Binding AvailableLanguages}"
+                          ItemContainerStyle="{StaticResource LanguageStyle}"/>
+                <MenuItem Header="{DynamicResource Menu_Themes}"
+                          ItemsSource="{Binding ElementName=Main, Path=BaseColors}"
+                          ItemContainerStyle="{StaticResource BaseColorStyle}"/>
+            </Menu>
+        </DockPanel>
+        <DataGrid Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="100" Width="*" Header="Column1"/>
+                <DataGridTextColumn MinWidth="100" Width="*" Header="Column2"/>
+                <DataGridTextColumn MinWidth="100" Width="*" Header="Column3"/>
+                <DataGridTextColumn MinWidth="100" Width="*" Header="Column4"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</mahctls:MetroWindow>

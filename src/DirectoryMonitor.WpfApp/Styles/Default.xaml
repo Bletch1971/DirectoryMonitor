@@ -1,0 +1,43 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vc="clr-namespace:DirectoryMonitor.ViewLib.Converters;assembly=DirectoryMonitor.ViewLib">
+
+    <vc:LanguageNameConverter x:Key="LanguageNameConverter"/>
+    <vc:MultiValueStringsMatchConverter x:Key="MultiValueStringsMatchConverter"/>
+
+    <Style x:Key="LanguageStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+        <Setter Property="Header" Value="{Binding Converter={StaticResource LanguageNameConverter}}"/>
+        <Setter Property="IsCheckable" Value="True"/>
+        <Setter Property="IsChecked">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource MultiValueStringsMatchConverter}" Mode="OneWay" FallbackValue="False">
+                    <Binding Mode="OneWay"/>
+                    <Binding ElementName="Main" Path="AvailableLanguages.SelectedLanguage" Mode="OneWay"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Command" Value="{Binding ElementName=Main, Path=SelectLanguageCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
+    <Style x:Key="ColorSchemeStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+        <Setter Property="Header" Value="{Binding DisplayName}"/>
+        <Setter Property="IsCheckable" Value="True"/>
+        <Setter Property="IsChecked">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource MultiValueStringsMatchConverter}" Mode="OneWay" FallbackValue="False">
+                    <Binding Path="Theme.DisplayName" Mode="OneWay"/>
+                    <Binding ElementName="Main" Path="SelectedTheme.DisplayName" Mode="OneWay"/>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Command" Value="{Binding ElementName=Main, Path=SelectThemeCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
+    <Style x:Key="BaseColorStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+        <Setter Property="Header" Value="{Binding DisplayName}"/>
+        <Setter Property="ItemsSource" Value="{Binding ColorSchemes}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ColorSchemeStyle}"/>
+    </Style>
+
+</ResourceDictionary>

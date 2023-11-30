@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{BC1E33CA-1FAF-49C6-A5E8-0DE722E0BCFD}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\nuget.config = ..\nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{42D8A6EF-2465-4D8D-BAB9-A52817B4E3E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1C086776-F7F2-4EB4-8F72-D1037D75A13E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryMonitor.App", "DirectoryMonitor.App\DirectoryMonitor.App.csproj", "{D1FB4D9D-F610-4951-8B50-C9A14B7E299A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryMonitor.ViewLib", "DirectoryMonitor.ViewLib\DirectoryMonitor.ViewLib.csproj", "{604C0DC2-A975-4918-BC67-3AAD3C9792BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryMonitor.WpfApp", "DirectoryMonitor.WpfApp\DirectoryMonitor.WpfApp.csproj", "{A1792F64-437B-4D55-BA43-ABA87B402818}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1FB4D9D-F610-4951-8B50-C9A14B7E299A} = {42D8A6EF-2465-4D8D-BAB9-A52817B4E3E9}
+		{604C0DC2-A975-4918-BC67-3AAD3C9792BF} = {42D8A6EF-2465-4D8D-BAB9-A52817B4E3E9}
+		{A1792F64-437B-4D55-BA43-ABA87B402818} = {42D8A6EF-2465-4D8D-BAB9-A52817B4E3E9}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1FB4D9D-F610-4951-8B50-C9A14B7E299A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1FB4D9D-F610-4951-8B50-C9A14B7E299A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1FB4D9D-F610-4951-8B50-C9A14B7E299A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1FB4D9D-F610-4951-8B50-C9A14B7E299A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604C0DC2-A975-4918-BC67-3AAD3C9792BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604C0DC2-A975-4918-BC67-3AAD3C9792BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604C0DC2-A975-4918-BC67-3AAD3C9792BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604C0DC2-A975-4918-BC67-3AAD3C9792BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1792F64-437B-4D55-BA43-ABA87B402818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1792F64-437B-4D55-BA43-ABA87B402818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1792F64-437B-4D55-BA43-ABA87B402818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1792F64-437B-4D55-BA43-ABA87B402818}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
