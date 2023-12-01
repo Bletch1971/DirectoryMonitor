@@ -1,3 +1,5 @@
+using DirectoryMonitor.ViewLib.Extensions;
+
 namespace DirectoryMonitor.ViewLib.Converters;
 
 public class LanguageMatchConverter : IValueConverter
@@ -12,8 +14,9 @@ public class LanguageMatchConverter : IValueConverter
         if (string.IsNullOrWhiteSpace(languageName) || !targetType.IsAssignableFrom(typeof(bool)))
             return DependencyProperty.UnsetValue;
 
-        return CultureInfo.CurrentCulture.Name
-            .Equals(languageName, StringComparison.OrdinalIgnoreCase);
+        var currentLanguage = Application.Current.DetectLanguage();
+        return currentLanguage is not null &&
+               currentLanguage.Equals(languageName, StringComparison.OrdinalIgnoreCase);
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

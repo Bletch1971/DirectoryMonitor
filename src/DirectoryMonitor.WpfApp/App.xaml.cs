@@ -1,5 +1,8 @@
-﻿using DirectoryMonitor.ViewLib.ObjectModels;
+﻿using ControlzEx.Theming;
+using DirectoryMonitor.App.Settings;
+using DirectoryMonitor.ViewLib.ObjectModels;
 using DirectoryMonitor.WpfApp.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace DirectoryMonitor.WpfApp;
 
@@ -18,6 +21,7 @@ public sealed partial class App
 
         await _host.StartAsync();
 
+        SetupApplication(_host.Services);
         RunApplication(_host.Services);
     }
 
@@ -41,11 +45,15 @@ public sealed partial class App
         AvailableThemes.Instance.AddThemesFromThemeManager();
     }
 
-    private void ConfigureAppConfiguration(HostBuilderContext hostingContext, IConfigurationBuilder appConfigBuilder)
+    private static void ConfigureAppConfiguration(
+        HostBuilderContext hostingContext, IConfigurationBuilder configBuilder)
     {
+        configBuilder
+            .ConfigureUserSettingsConfiguration(hostingContext);
     }
 
-    private static void ConfigureServices(HostBuilderContext hostingContext, IServiceCollection services)
+    private static void ConfigureServices(
+        HostBuilderContext hostingContext, IServiceCollection services)
     {
         services
             //.AddAutoMapper(typeof(MapProfile))
@@ -66,5 +74,36 @@ public sealed partial class App
         var window = serviceProvider.GetService<Window>()
                      ?? throw new InvalidOperationException($"Unable to resolve service for startup window.");
         window.Show();
+    }
+
+    private static void SetupApplication(IServiceProvider serviceProvider)
+    {
+        var logger = serviceProvider.GetService<ILogger<App>>();
+        var userSettings = serviceProvider.GetService<IOptions<UserSettings>>()?
+            .Value;
+        if (userSettings is null)
+            return;
+
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(userSettings.Language))
+                Instance.GlobalizationManager.SwitchLanguage(userSettings.Language, true);
+        }
+        catch (Exception ex)
+        {
+            // just output the exception message, and move on
+            logger?.LogDebug("Error occurred while setting language: {Error}", ex.Message);
+        }
+
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(userSettings.Theme))
+                ThemeManager.Current.ChangeTheme(Instance, userSettings.Theme);
+        }
+        catch (Exception ex)
+        {
+            // just output the exception message, and move on
+            logger?.LogDebug("Error occurred while setting theme: {Error}", ex.Message);
+        }
     }
 }

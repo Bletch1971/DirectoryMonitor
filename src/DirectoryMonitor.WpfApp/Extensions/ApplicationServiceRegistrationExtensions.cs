@@ -1,4 +1,6 @@
-﻿using DirectoryMonitor.ViewLib.ObjectModels;
+﻿using DirectoryMonitor.App.Repositories;
+using DirectoryMonitor.App.Settings;
+using DirectoryMonitor.ViewLib.ObjectModels;
 using DirectoryMonitor.WpfApp.Windows;
 using WPFSharp.Globalizer;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
@@ -6,11 +8,16 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 namespace DirectoryMonitor.WpfApp.Extensions;
 
 [ExcludeFromCodeCoverage]
-internal static class ApplicationRegistrationExtensions
+internal static class ApplicationServiceRegistrationExtensions
 {
     public static IServiceCollection ConfigureApplicationServices(
         this IServiceCollection services, IConfiguration configuration)
     {
+        services
+            .Configure<UserSettings>(configuration
+                .GetSection(nameof(UserSettings)));
+        services.AddSingleton<IUserSettingsRepository, FileUserSettingsRepository>();
+
         // services
         //     .Configure<FileGameDataRepositorySettings>(configuration
         //         .GetSection(nameof(FileGameDataRepositorySettings)));
