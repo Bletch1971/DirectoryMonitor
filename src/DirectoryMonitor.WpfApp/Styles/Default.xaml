@@ -4,41 +4,29 @@
     xmlns:vc="clr-namespace:DirectoryMonitor.ViewLib.Converters;assembly=DirectoryMonitor.ViewLib"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
 
+    <vc:LanguageMatchConverter x:Key="LanguageMatchConverter"/>
     <vc:LanguageNameConverter x:Key="LanguageNameConverter"/>
-    <vc:MultiValueStringsMatchConverter x:Key="MultiValueStringsMatchConverter"/>
+    <vc:ThemeMatchConverter x:Key="ThemeMatchConverter"/>
 
-    <Style x:Key="LanguageDropDownButtonStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}" >
+    <Style x:Key="LanguageMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}" >
         <Setter Property="Header" Value="{Binding Converter={StaticResource LanguageNameConverter}}"/>
         <Setter Property="IsCheckable" Value="True"/>
-        <Setter Property="IsChecked">
-            <Setter.Value>
-                <MultiBinding Converter="{StaticResource MultiValueStringsMatchConverter}" Mode="OneWay" FallbackValue="False">
-                    <Binding Mode="OneWay"/>
-                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}" Path="DataContext.AvailableLanguages.SelectedLanguage"/>
-                </MultiBinding>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="IsChecked" Value="{Binding Converter={StaticResource LanguageMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectLanguageCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
     </Style>
-    <Style x:Key="ColorSchemeDropDownButtonStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-        <Setter Property="Header" Value="{Binding DisplayName}"/>
+
+    <Style x:Key="ColorSchemeMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+        <Setter Property="Header" Value="{Binding}"/>
         <Setter Property="IsCheckable" Value="True"/>
-        <Setter Property="IsChecked">
-            <Setter.Value>
-                <MultiBinding Converter="{StaticResource MultiValueStringsMatchConverter}" Mode="OneWay" FallbackValue="False">
-                    <Binding Path="Theme.DisplayName" Mode="OneWay"/>
-                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}" Path="DataContext.SelectedTheme.DisplayName"/>
-                </MultiBinding>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="IsChecked" Value="{Binding Converter={StaticResource ThemeMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectThemeCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
     </Style>
-    <Style x:Key="BaseColorDropDownButtonStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+    <Style x:Key="BaseColorMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="Header" Value="{Binding DisplayName}"/>
-        <Setter Property="ItemsSource" Value="{Binding ColorSchemes}"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource ColorSchemeDropDownButtonStyle}"/>
+        <Setter Property="ItemsSource" Value="{Binding}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ColorSchemeMenuItemStyle}"/>
     </Style>
 
 </ResourceDictionary>

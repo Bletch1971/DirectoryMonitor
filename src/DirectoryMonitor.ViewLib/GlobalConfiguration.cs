@@ -1,5 +1,6 @@
 global using System.Diagnostics.CodeAnalysis;
 global using System.Collections.ObjectModel;
+global using System.Collections.Specialized;
 global using System.Globalization;
 global using System.Windows;
 //global using System.Windows.Controls;

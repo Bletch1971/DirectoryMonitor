@@ -1,4 +1,6 @@
-﻿using DirectoryMonitor.WpfApp.Windows;
+﻿using DirectoryMonitor.ViewLib.ObjectModels;
+using DirectoryMonitor.WpfApp.Windows;
+using WPFSharp.Globalizer;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace DirectoryMonitor.WpfApp.Extensions;
@@ -16,6 +18,9 @@ internal static class ApplicationRegistrationExtensions
         //
         // services.AddSingleton<ICalculatorService, CalculatorService>();
         // services.AddSingleton<IGameDataService, GameDataService>();
+
+        services.AddSingleton(AvailableLanguages.Instance);
+        services.AddSingleton(AvailableThemes.Instance);
 
         services.AddSingleton<Window, MainWindow>(); // defines the initial startup window
         services.AddSingleton<MainWindow>();

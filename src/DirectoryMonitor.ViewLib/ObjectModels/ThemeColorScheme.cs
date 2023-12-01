@@ -7,4 +7,6 @@ public sealed class ThemeColorScheme
 {
     public string DisplayName { get; init; } = string.Empty;
     public Theme? Theme { get; init; }
+
+    public override string ToString() => DisplayName;
 }

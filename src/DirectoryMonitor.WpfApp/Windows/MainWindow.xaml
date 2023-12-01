@@ -19,10 +19,10 @@
         <mah:WindowCommands>
             <mah:DropDownButton Content="{DynamicResource Menu_Language}"
                                 ItemsSource="{Binding AvailableLanguages}"
-                                ItemContainerStyle="{StaticResource LanguageDropDownButtonStyle}"/>
+                                ItemContainerStyle="{StaticResource LanguageMenuItemStyle}"/>
             <mah:DropDownButton Content="{DynamicResource Menu_Themes}"
-                                ItemsSource="{Binding ElementName=Main, Path=BaseColors}"
-                                ItemContainerStyle="{StaticResource BaseColorDropDownButtonStyle}"/>
+                                ItemsSource="{Binding AvailableThemes}"
+                                ItemContainerStyle="{StaticResource BaseColorMenuItemStyle}"/>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 

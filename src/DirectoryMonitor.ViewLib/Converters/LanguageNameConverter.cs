@@ -6,23 +6,31 @@ public sealed class LanguageNameConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        var language = value as string;
-        if (string.IsNullOrWhiteSpace(language))
-            return null;
+        var languageName = value switch
+        {
+            string name => name,
+            _ => string.Empty
+        };
+        if (string.IsNullOrWhiteSpace(languageName) || !targetType.IsAssignableFrom(typeof(string)))
+            return string.Empty;
 
-        var ci = new CultureInfo(language);
-        var locConverter = new LocalizationConverter();
-        return locConverter.Convert(language, typeof(string), ci.DisplayName, CultureInfo.CurrentCulture);
+        var ci = new CultureInfo(languageName);
+        var converter = new LocalizationConverter();
+        return converter.Convert(languageName, typeof(string), ci.DisplayName, CultureInfo.CurrentCulture);
     }
 
     public object? ConvertBack(object? value, Type targetType, object?parameter, CultureInfo culture)
     {
-        var language = value as string;
-        if (string.IsNullOrWhiteSpace(language))
-            return null;
+        var languageName = value switch
+        {
+            string name => name,
+            _ => string.Empty
+        };
+        if (string.IsNullOrWhiteSpace(languageName) || !targetType.IsAssignableFrom(typeof(string)))
+            return string.Empty;
 
         return AvailableLanguages.Instance.CultureInfoMap
-            .FirstOrDefault(x => x.Value == language)
+            .FirstOrDefault(x => x.Value == languageName)
             .Key;
     }
 }

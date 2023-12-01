@@ -1,4 +1,5 @@
-﻿using DirectoryMonitor.WpfApp.Extensions;
+﻿using DirectoryMonitor.ViewLib.ObjectModels;
+using DirectoryMonitor.WpfApp.Extensions;
 
 namespace DirectoryMonitor.WpfApp;
 
@@ -11,6 +12,7 @@ public sealed partial class App
     {
         _host = Host
             .CreateDefaultBuilder(e.Args)
+            .ConfigureAppConfiguration(ConfigureAppConfiguration)
             .ConfigureServices(ConfigureServices)
             .Build();
 
@@ -31,7 +33,19 @@ public sealed partial class App
             await _host.StopAsync(TimeSpan.FromSeconds(5));
     }
 
-    private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+    public override void Init()
+    {
+        base.Init();
+
+        AvailableThemes.CreateInstance();
+        AvailableThemes.Instance.AddThemesFromThemeManager();
+    }
+
+    private void ConfigureAppConfiguration(HostBuilderContext hostingContext, IConfigurationBuilder appConfigBuilder)
+    {
+    }
+
+    private static void ConfigureServices(HostBuilderContext hostingContext, IServiceCollection services)
     {
         services
             //.AddAutoMapper(typeof(MapProfile))
@@ -43,8 +57,8 @@ public sealed partial class App
             });
 
         services
-            .ConfigureLogManager(context.Configuration)
-            .ConfigureApplicationServices(context.Configuration);
+            .ConfigureLogManager(hostingContext.Configuration)
+            .ConfigureApplicationServices(hostingContext.Configuration);
     }
 
     private static void RunApplication(IServiceProvider serviceProvider)
