@@ -21,7 +21,7 @@ public class ThemeNameConverter : IValueConverter
 
         Application.Current.UpdateLanguage();
 
-        return Application.Current.TryFindResource($"Color_{themeName}", themeName);
+        return Application.Current.TryFindStringResource($"Theme_{themeName}", themeName);
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>

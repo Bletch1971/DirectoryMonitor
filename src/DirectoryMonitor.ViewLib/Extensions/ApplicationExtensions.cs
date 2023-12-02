@@ -1,4 +1,5 @@
-﻿using WPFSharp.Globalizer;
+﻿using DirectoryMonitor.App.Extensions;
+using WPFSharp.Globalizer;
 
 namespace DirectoryMonitor.ViewLib.Extensions;
 
@@ -66,13 +67,15 @@ public static class ApplicationExtensions
     private static bool IsLanguageResourceDictionary([NotNull]this ResourceDictionary dict) =>
         dict is GlobalizationResourceDictionary;
 
-    public static object? TryFindResource([NotNull]this Application application, [NotNull]string resourceKey, string fallbackValue)
-    {
-        var result = application.TryFindResource(resourceKey);
-        return result is null
-            ? fallbackValue
-            : result.ToString();
-    }
+    public static object? TryFindResource(
+        [NotNull]this Application application, [NotNull]string resourceKey, object fallbackValue) =>
+        application.TryFindResource(resourceKey) ?? fallbackValue;
+
+    public static string TryFindStringResource(
+        [NotNull]this Application application, [NotNull]string resourceKey, [NotNull]string fallbackValue) =>
+        (application.TryFindResource(resourceKey) as string ?? fallbackValue)
+            .IReplace("\\r", "\r")
+            .IReplace("\\n", "\n");
 
     public static void UpdateLanguage([NotNull]this Application application)
     {

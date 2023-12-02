@@ -18,7 +18,7 @@ public sealed class LanguageNameConverter : IValueConverter
         Application.Current.UpdateLanguage();
 
         var ci = new CultureInfo(languageName);
-        return Application.Current.TryFindResource($"Language_{languageName}", ci.DisplayName);
+        return Application.Current.TryFindStringResource($"Language_{languageName}", ci.DisplayName);
     }
 
     public object? ConvertBack(object? value, Type targetType, object?parameter, CultureInfo culture)
