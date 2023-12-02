@@ -1,30 +1,29 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vc="clr-namespace:DirectoryMonitor.ViewLib.Converters;assembly=DirectoryMonitor.ViewLib"
-    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:vc="clr-namespace:DirectoryMonitor.ViewLib.Converters;assembly=DirectoryMonitor.ViewLib">
 
     <vc:LanguageMatchConverter x:Key="LanguageMatchConverter"/>
     <vc:LanguageNameConverter x:Key="LanguageNameConverter"/>
     <vc:ThemeMatchConverter x:Key="ThemeMatchConverter"/>
+    <vc:ThemeNameConverter x:Key="ThemeNameConverter"/>
 
     <Style x:Key="LanguageMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}" >
         <Setter Property="Header" Value="{Binding Converter={StaticResource LanguageNameConverter}}"/>
-        <Setter Property="IsCheckable" Value="False"/>
         <Setter Property="IsChecked" Value="{Binding Converter={StaticResource LanguageMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectLanguageCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
     </Style>
 
     <Style x:Key="ColorSchemeMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-        <Setter Property="Header" Value="{Binding}"/>
-        <Setter Property="IsCheckable" Value="False"/>
+        <Setter Property="Header" Value="{Binding Converter={StaticResource ThemeNameConverter}}"/>
         <Setter Property="IsChecked" Value="{Binding Converter={StaticResource ThemeMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectThemeCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
     </Style>
     <Style x:Key="BaseColorMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-        <Setter Property="Header" Value="{Binding DisplayName}"/>
+        <Setter Property="Header" Value="{Binding Converter={StaticResource ThemeNameConverter}}"/>
         <Setter Property="ItemsSource" Value="{Binding}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource ColorSchemeMenuItemStyle}"/>
     </Style>

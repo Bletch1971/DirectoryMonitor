@@ -23,8 +23,8 @@ public partial class MainWindow
 
         this.DataContext = this;
 
-        GlobalizedApplication.Instance.GlobalizationManager.ResourceDictionaryChangedEvent += GlobalizationManagerResourceDictionaryChanged;
-        ThemeManager.Current.ThemeChanged += ThemeManagerOnThemeChanged;
+        GlobalizedApplication.Instance.GlobalizationManager.ResourceDictionaryChangedEvent += ResourceDictionaryChangedEventHandler;
+        ThemeManager.Current.ThemeChanged += ThemeChangedEventHandler;
     }
 
     private static readonly DependencyProperty AvailableLanguagesProperty = DependencyProperty.Register(
@@ -74,12 +74,12 @@ public partial class MainWindow
         ThemeManager.Current.ChangeTheme(GlobalizedApplication.Instance, colorScheme.Theme);
     }
 
-    private void GlobalizationManagerResourceDictionaryChanged(object source, ResourceDictionaryChangedEventArgs e)
+    private void ResourceDictionaryChangedEventHandler(object source, ResourceDictionaryChangedEventArgs e)
     {
         //_logger.LogDebug("Language switched from {OldLanguage} to {NewLanguage}", SelectedLanguage, AvailableLanguages.SelectedLanguage);
     }
 
-    private void ThemeManagerOnThemeChanged(object? sender, ThemeChangedEventArgs e)
+    private void ThemeChangedEventHandler(object? sender, ThemeChangedEventArgs e)
     {
         _logger.LogDebug("Theme switched from {OldTheme} to {NewTheme}", e.OldTheme?.DisplayName, e.NewTheme.DisplayName);
     }

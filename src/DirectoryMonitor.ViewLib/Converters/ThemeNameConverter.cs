@@ -1,15 +1,17 @@
 ﻿using ControlzEx.Theming;
+using DirectoryMonitor.ViewLib.Extensions;
 using DirectoryMonitor.ViewLib.ObjectModels;
 
 namespace DirectoryMonitor.ViewLib.Converters;
 
-public class ThemeMatchConverter : IValueConverter
+public class ThemeNameConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var themeName = value switch
         {
             ThemeColorScheme {Theme: not null} colorScheme => colorScheme.Theme.DisplayName,
+            ThemeBaseColor baseColor => baseColor.DisplayName,
             Theme theme => theme.DisplayName,
             string name => name,
             _ => string.Empty
@@ -17,11 +19,11 @@ public class ThemeMatchConverter : IValueConverter
         if (string.IsNullOrWhiteSpace(themeName) || !targetType.IsAssignableFrom(typeof(bool)))
             return DependencyProperty.UnsetValue;
 
-        var currentTheme = AvailableThemes.Instance.SelectedTheme;
-        return currentTheme is not null &&
-               currentTheme.DisplayName.Equals(themeName, StringComparison.OrdinalIgnoreCase);
+        Application.Current.UpdateLanguage();
+
+        return Application.Current.TryFindResource($"Color_{themeName}", themeName);
     }
 
-    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        => throw new NotImplementedException();
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        throw new NotImplementedException();
 }
