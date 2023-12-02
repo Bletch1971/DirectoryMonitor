@@ -10,7 +10,7 @@
 
     <Style x:Key="LanguageMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}" >
         <Setter Property="Header" Value="{Binding Converter={StaticResource LanguageNameConverter}}"/>
-        <Setter Property="IsCheckable" Value="True"/>
+        <Setter Property="IsCheckable" Value="False"/>
         <Setter Property="IsChecked" Value="{Binding Converter={StaticResource LanguageMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectLanguageCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
@@ -18,7 +18,7 @@
 
     <Style x:Key="ColorSchemeMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="Header" Value="{Binding}"/>
-        <Setter Property="IsCheckable" Value="True"/>
+        <Setter Property="IsCheckable" Value="False"/>
         <Setter Property="IsChecked" Value="{Binding Converter={StaticResource ThemeMatchConverter}, Mode=OneWay, FallbackValue=False}"/>
         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectThemeCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />

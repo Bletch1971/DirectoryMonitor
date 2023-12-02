@@ -63,6 +63,26 @@ public static class ApplicationExtensions
             ? grd.Name
             : string.Empty;
 
-    private static bool IsLanguageResourceDictionary(this ResourceDictionary dict) =>
+    private static bool IsLanguageResourceDictionary([NotNull]this ResourceDictionary dict) =>
         dict is GlobalizationResourceDictionary;
+
+    public static object? TryFindResource([NotNull]this Application application, [NotNull]string resourceKey, string fallbackValue)
+    {
+        var result = application.TryFindResource(resourceKey);
+        return result is null
+            ? fallbackValue
+            : result.ToString();
+    }
+
+    public static void UpdateLanguage([NotNull]this Application application)
+    {
+        var currentLanguage = application.DetectLanguage();
+        if (currentLanguage is null ||
+            Thread.CurrentThread.CurrentCulture.Name.Equals(currentLanguage, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        var currentCulture = new CultureInfo(currentLanguage);
+        Thread.CurrentThread.CurrentCulture = currentCulture;
+        Thread.CurrentThread.CurrentUICulture = currentCulture;
+    }
 }

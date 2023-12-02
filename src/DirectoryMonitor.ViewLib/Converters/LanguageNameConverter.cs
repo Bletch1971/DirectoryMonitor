@@ -1,4 +1,5 @@
-﻿using WPFSharp.Globalizer;
+﻿using DirectoryMonitor.ViewLib.Extensions;
+using WPFSharp.Globalizer;
 
 namespace DirectoryMonitor.ViewLib.Converters;
 
@@ -14,9 +15,10 @@ public sealed class LanguageNameConverter : IValueConverter
         if (string.IsNullOrWhiteSpace(languageName) || !targetType.IsAssignableFrom(typeof(string)))
             return string.Empty;
 
+        Application.Current.UpdateLanguage();
+
         var ci = new CultureInfo(languageName);
-        var converter = new LocalizationConverter();
-        return converter.Convert(languageName, typeof(string), ci.DisplayName, CultureInfo.CurrentCulture);
+        return Application.Current.TryFindResource($"Language_{languageName}", ci.DisplayName);
     }
 
     public object? ConvertBack(object? value, Type targetType, object?parameter, CultureInfo culture)

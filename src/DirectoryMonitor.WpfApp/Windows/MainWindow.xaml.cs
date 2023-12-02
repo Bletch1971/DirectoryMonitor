@@ -62,7 +62,7 @@ public partial class MainWindow
             return;
 
         _logger.LogDebug("Language {Language} selected", language);
-        GlobalizedApplication.Instance.GlobalizationManager.SwitchLanguage(language);
+        GlobalizedApplication.Instance.GlobalizationManager.SwitchLanguage(language, true);
     }
 
     private void ExecuteSelectThemeCommand(ThemeColorScheme? colorScheme)
