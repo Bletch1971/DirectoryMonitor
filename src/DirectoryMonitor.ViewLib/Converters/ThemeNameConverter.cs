@@ -10,7 +10,7 @@ public class ThemeNameConverter : IValueConverter
     {
         var themeName = value switch
         {
-            ThemeColorScheme {Theme: not null} colorScheme => colorScheme.Theme.DisplayName,
+            ThemeColorScheme colorScheme => colorScheme.DisplayName,
             ThemeBaseColor baseColor => baseColor.DisplayName,
             Theme theme => theme.DisplayName,
             string name => name,

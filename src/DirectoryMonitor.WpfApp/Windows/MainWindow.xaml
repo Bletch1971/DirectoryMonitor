@@ -30,14 +30,5 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <DataGrid Grid.Row="0">
-            <DataGrid.Columns>
-                <DataGridTextColumn MinWidth="100" Width="*" Header="Column1"/>
-                <DataGridTextColumn MinWidth="100" Width="*" Header="Column2"/>
-                <DataGridTextColumn MinWidth="100" Width="*" Header="Column3"/>
-                <DataGridTextColumn MinWidth="100" Width="*" Header="Column4"/>
-            </DataGrid.Columns>
-        </DataGrid>
     </Grid>
 </mah:MetroWindow>
